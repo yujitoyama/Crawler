@@ -4,19 +4,18 @@
  */
 
 mysql = require('mysql');
-db = require('./routes/commondao')
+db = require('./commondao')
 
-
+//【ユーザ追加画面遷移アクション】
 exports.addusersc = function(req, res){
   res.render('adduser', { title: 'Adduser' });
 };
 
-
+//【ユーザ追加アクション】
 exports.adduser = function(req, res){
-	  res.render('login', { title: 'Adduser' });
-	  
-		var connection = db.dbinit();
-		
+	  res.render('index', { title: 'Adduser' });
+//DB接続	  
+		var connection = db.dbinit();		
 		connection.connect(function(err) {
 			  if (err) {
 			    console.error('error connecting: ' + err.stack);
@@ -24,26 +23,26 @@ exports.adduser = function(req, res){
 			  }
 			  console.log('connected as id ' + connection.threadId);
 			});
+
+//SQL準備		
+		var sql = "insert into crawler.user(name,password) values('";
+		sql += req.body.username + "','"	+ req.body.userpassword + "')";	
 		
-		var sql = "insert into crawler.user(userid,name,password) values('";
-		sql += req.body.userid + "','" + req.body.username + "','"	+ req.body.userpassword + "')";	
-		
-		connection.beginTransaction(function(err,result){
+/*		connection.beginTransaction(function(err,result){
 			if(err){
 				console.log("begin:" + err);
 				res.redirect('/');
 				return;
 			}else{
+*/
+//SQL実行		
 		var query = connection.query(sql, function (err, rows) {
 			if (err) {
 				console.log(err);
 				connection.rollback();
 			} else 
 				connection.commit();
-				res.redirect('/');	
 				});
-			}});
-		
-		db.dbend();
-	    
+//DB切断		
+		db.dbend();    
 	};
