@@ -5,8 +5,11 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , login = require('./routes/login')
+  , adduser = require('./routes/adduser')
   , user = require('./routes/user')
   , http = require('http')
+  , mysql = require('mysql')
   , path = require('path');
 
 var app = express();
@@ -28,7 +31,11 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.post('/login', login.login);
+app.post('/addusersc', adduser.addusersc);
+app.post('/adduser', adduser.adduser);
 app.get('/users', user.list);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
