@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html ng-app>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-  </head>
-  <body>
-    <h1><b><%= title %></b></h1>
-    <p>Welcome to <%= title %> enjoy using world wide information</p>
+<head>
+	<title><%= title %></title>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+</head>
+<body>
+	<h1><b><%= title %></b></h1>
+	<p>Welcome to <%= title %> enjoy using world wide information</p>
 	<h2>Login</h2>
-    <form action="/login" method="POST">
-     <label for="userid">UserID:</label>
-    	<input id="userid" type="text" name="userid">
-     <label for="userpassword">Password:</label>
-   	    <input id="userpassword" type="password" name="userpassword">
-	 <input type="submit" value="submit">
-	</form>
-	
-	<h2>Add User</h2>
-    <form action="/addusersc" method="POST">
-	 <input type="submit" value="submit">
-	</form>
-
-  </body>
+		<form action="/login" method="POST">
+			<label for="userid">UserID:</label>
+				<input id="userid" type="text" name="userid">
+				<label for="userpassword">Password:</label>
+				<input id="userpassword" type="password" name="userpassword">
+				<input type="submit" value="submit">
+		</form>
+	<h2>User Control</h2>
+		<form action="/addusersc" method="POST">
+				<label for="adduser">AddUser:</label>
+				<input id="adduser" type="submit" value="submit">
+		</form>
+		<form action="/showuser" method="POST">
+				<label for="showuser">ShowUser:</label>
+				<input id="showuser" type="submit" value="submit">
+		</form>
+</body>
 </html>

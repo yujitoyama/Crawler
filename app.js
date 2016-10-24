@@ -7,6 +7,7 @@ var express = require('express')
   , routes = require('./routes')
   , login = require('./routes/login')
   , adduser = require('./routes/adduser')
+  , showuser = require('./routes/showuser')
   , user = require('./routes/user')
   , http = require('http')
   , mysql = require('mysql')
@@ -34,6 +35,7 @@ app.get('/', routes.index);
 app.post('/login', login.login);
 app.post('/addusersc', adduser.addusersc);
 app.post('/adduser', adduser.adduser);
+app.post('/showuser', showuser.showuser);
 app.get('/users', user.list);
 
 

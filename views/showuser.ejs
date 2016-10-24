@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  </head>
+  <body>
+  	<h1>UserList</h1>
+  	<table>
+  	<% for(var i = 0;i < datas.length;i++){ %>
+  	<tr>
+  	<td><%= datas[i].userid %></td>
+	<td><%= datas[i].name %></td>
+	</tr>
+	<% } %>
+	</table>
+	<h2>Back to Login</h2>
+    <form action="/" method="GET">
+     <label for="login">Back to Login:</label>
+	 <input id="login" type="submit" value="submit">
+	</form>
+ </body>
+</html>
