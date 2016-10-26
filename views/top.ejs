@@ -6,13 +6,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   </head>
   <body>
-    <h1><b><%= title %></b></h1>
-    <p><%= title %></p>
-    <form action="/login",method="POST">
-     <label for="userid">UserID:</label>
-    	<input id="userid" type="text" name="userid">
-     <label for="userpassword">Password:</label>
-   	    <input id="userpassword" type="password" name="userpassword">
+  	<h1><%= datas[0].name %>'s page</h1>
+	<br>
+
+	<h1>CrawlerList</h1>
+  	<table>
+  	<% for(var i = 0;i < datas.length;i++){ %>
+  	<tr>
+  	<td><%= datas[i].crawid %></td>
+	</tr>
+	<% } %>
+	</table>
+	
+    <h1><b><%= func1 %></b></h1>
+    <form action="/addcrawler",method="POST">
+     <label for="crawid">CrawlerID:</label>     
 	 <input type="submit" value="ok">
 	</form>
   </body>

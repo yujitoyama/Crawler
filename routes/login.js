@@ -17,25 +17,30 @@ exports.login = function(req, res){
 		});
 
 //SQL準備		
-	var sql = "select * from crawler.user where userid = ? and password = ?";
-	
-//SQL実行		
+	var sql = "select * from crawler.user where user.userid = ? and user.password = ?";
+
+//SQL実行	
 	var query = connection.query(sql, [req.body.userid, req.body.userpassword
 	                                   ],function (err, rows) {
 		if (err) {
 			console.log(err);
 			connection.rollback();
 		} else 
-			if(rows.length==1){
-			res.render('top', { 
-				title: 'top' 	
-			})}
-			else{
+			if(rows.length!=1){
 			res.render('loginerr',{
 				title: 'loginerr'
 			})	
 			};
+			req.session = rows;
+			res.render('top', { 
+				title: 'top',
+//ログイン後にユーザー名を表示したい、、
+				datas: rows,
+				func1: 'Add crawler'
 			});
+			});
+	
 //DB切断		
 	db.dbend();   
+	
 };

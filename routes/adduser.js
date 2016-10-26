@@ -11,7 +11,7 @@ exports.addusersc = function(req, res){
   res.render('adduser', { title: 'Adduser' });
 };
 
-//【ユーザ追加アクション】
+//【ユーザ追加アクション/初期クローラー追加アクション】
 exports.adduser = function(req, res){
 	  res.render('index', { title: 'Adduser' });
 //DB接続	  
@@ -25,8 +25,8 @@ exports.adduser = function(req, res){
 			});
 
 //SQL準備		
-		var sql = "insert into crawler.user(name,password) values('";
-		sql += req.body.username + "','"	+ req.body.userpassword + "')";	
+		var sql1 = "insert into crawler.user(name,password) values('";
+		sql1 += req.body.username + "','"	+ req.body.userpassword + "')";	
 		
 /*		connection.beginTransaction(function(err,result){
 			if(err){
@@ -35,14 +35,16 @@ exports.adduser = function(req, res){
 				return;
 			}else{
 */
-//SQL実行		
-		var query = connection.query(sql, function (err, rows) {
+//SQL実行	
+//userテーブルへのユーザデータのインサート
+		var query1 = connection.query(sql1, function (err, rows) {
 			if (err) {
 				console.log(err);
 				connection.rollback();
 			} else 
 				connection.commit();
 				});
+		
 //DB切断		
 		db.dbend();    
 	};
