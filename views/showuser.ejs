@@ -7,10 +7,10 @@
   </head>
   <body>
   	<h1>UserList</h1>
-  	<table>
-  	<% for(var i = 0;i < datas.length;i++){ %>
-  	<tr>
-  	<td><%= datas[i].userid %></td>
+	<table>
+	<% for (var i in datas){ %>
+	<tr>
+	<td><%= datas[i].userid %></td>
 	<td><%= datas[i].name %></td>
 	</tr>
 	<% } %>

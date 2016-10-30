@@ -14,7 +14,7 @@ exports.addusersc = function(req, res){
 
 //【ユーザ追加アクション/初期クローラー追加アクション】
 exports.adduser = function(req, res){
-	usedao.adduser();
+	userdao.adduser(req,res);
 	res.render('index', { title: 'Adduser' });
- 
+
 	};
