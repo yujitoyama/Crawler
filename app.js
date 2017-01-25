@@ -8,6 +8,7 @@ var express = require('express')
   , login = require('./routes/action/login')
   , adduser = require('./routes/action/adduser')
   , showuser = require('./routes/action/showuser')
+  , python = require('./routes/python/py1')
   , user = require('./routes/user')
   , http = require('http')
   , mysql = require('mysql')
@@ -24,10 +25,11 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(app.router);
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.cookieParser('secret','mycom_sercred_key'));
 app.use(express.session({key:'session_id'}));
+app.use(app.router);
 
 // development only
 if ('development' == app.get('env')) {
@@ -39,6 +41,7 @@ app.post('/login', login.login);
 app.post('/addusersc', adduser.addusersc);
 app.post('/adduser', adduser.adduser);
 app.post('/showuser', showuser.showuser);
+app.post('/py1', python.callpy1);
 app.get('/users', user.list);
 
 

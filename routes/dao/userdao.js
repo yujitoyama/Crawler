@@ -6,9 +6,10 @@
 mysql = require('mysql');
 db = require('./commondao');
 
+
 //【ユーザ情報取得ファンクション】
 exports.showuser = function(req, res){
-	
+
 //DB接続	  
 		var connection = db.dbinit();		
 		connection.connect(function(err) {
@@ -90,10 +91,28 @@ exports.login = function(req, res){
 		});
 
 //SQL準備		
-	var sql = "select * from crawler.user where user.userid = ? and user.password = ?";
+	var sql1 = "select * from crawler.crawrel where userid = ?"
+	var sql2 = "select * from crawler.user where user.userid = ? and user.password = ?";
+	
 	
 //SQL実行	
-	function query(sql,req,res) {connection.query(sql, [req.body.userid, req.body.userpassword
+	//ログインユーザに紐づくcrawidの取得
+	function query1(sql1,req,res) {connection.query(sql1, [req.body.userid
+	               	                                   ],function (err, rows) {
+	               					if (err) {
+	               						console.log(err);
+	               						connection.rollback();
+	               					} else 
+	               						//セッションにユーザidに紐づくcrawidを設定
+	               						if(rows === undefined){
+	               						req.session.crawid = 'not registerd';
+	               						}
+	               						req.session.crawid = rows;
+	               					})
+	               					};
+
+	//ログインユーザ情報の取得
+	function query2(sql2,req,res) {connection.query(sql2, [req.body.userid, req.body.userpassword
 	                                   ],function (err, rows) {
 					if (err) {
 						console.log(err);
@@ -107,11 +126,14 @@ exports.login = function(req, res){
 							res.render('top', { 
 								title: 'top',
 								datas: rows,	
-								func1: 'Add crawler'
+								func1: 'Add crawler',
+								crawids: req.session.crawid
 							});
 					})
 					};
-				query(sql,req,res);
+				
+				query1(sql1,req,res);
+				query2(sql2,req,res);
 
 //DB切断
 		db.dbend();

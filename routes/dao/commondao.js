@@ -9,7 +9,7 @@ exports.dbinit = function(req, res){
 		host: 'localhost',
 		database: 'crawler',
 		user: 'root',
-		password: 'oracle'
+		password: ''
 	});
 	return connection;
 };
