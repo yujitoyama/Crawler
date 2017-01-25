@@ -127,6 +127,7 @@ exports.login = function(req, res){
 								title: 'top',
 								datas: rows,	
 								func1: 'Add crawler',
+								pyout: 'none',
 								crawids: req.session.crawid
 							});
 					})
